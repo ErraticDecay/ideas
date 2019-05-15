@@ -40,3 +40,24 @@ To add messages to HTML page it should look like this:
     <div id="messages">nothing received yet</div>
   </body>
 </html>
+
+
+https://stackoverflow.com/questions/15721679/update-and-render-a-value-from-flask-periodically
+
+@app.route('/_stuff', methods= ['GET'])
+def stuff():
+    cpu=round(getCpuLoad())
+    ram=round(getVmem())
+    disk=round(getDisk())
+    return jsonify(cpu=cpu, ram=ram, disk=disk)
+Javascript
+
+function update_values() {
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $.getJSON($SCRIPT_ROOT+"/_stuff",
+                function(data) {
+                    $("#cpuload").text(data.cpu+" %")
+                    $("#ram").text(data.ram+" %")
+                    $("#disk").text(data.disk+" %")
+                });
+        }
