@@ -1,0 +1,10 @@
+Create a batch job lookup tool that:
+
+execution history
+previously resolved log locations (from tickets)
+dependencies/successors - entire relational dep/suc matrix
+no. abends in last X days
+business rules associated
+associated knowledge articles
+
+multi div page with each section dynamic
