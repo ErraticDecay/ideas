@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+
+f = open("E:/esp_def.txt")
+print("{}".format(f))
+job_dict_list = {}
+app_dict_list = {}
+#job name, app, deps..
+for line in f:
+    #print("{}".format(line))
+    line = line.rstrip()
+    line_s = line.split(",")
+
+    job_name = line_s.pop(0)
+    app_name = line_s.pop(0)
+
+    if app_name in app_dict_list:
+        app_dict_list[app_name].append(job_name)
+    else:
+        app_dict_list[app_name] = [job_name]
+
+    if type(line_s) is list:
+        for dep in line_s:
+            job_dict_list.setdefault(job_name, {})[dep] = 1
+            temp_list = [key for key, value in job_dict_list.items() if dep in value]
+            if temp_list:
+                print("Dependency:{} -- key {} also exists as value in {}".format(job_name, dep, temp_list))
+                for temp_item in temp_list:
+                    if job_name != temp_item:
+                        print("Adding {} to {}".format(job_name, temp_item))
+                        job_dict_list.setdefault(temp_item, {})[job_name] = 1
+    else:
+        job_dict_list[job_name] = [line_s]
+
+
+
+
+
+print("App--> {}".format(app_dict_list))
+
+print("Job--> {}".format(job_dict_list))
+
+element = 'JOB1'
+#print([key for key, value in job_dict_list.items() if element in value])
