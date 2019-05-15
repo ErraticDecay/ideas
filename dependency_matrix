@@ -1,5 +1,12 @@
 #!/usr/bin/python3
+'''
+Contents of file
 
+JOB1,APP1,JOB2
+JOB2,APP1,JOB3
+JOB3,APP2,JOB7,JOB4,JOB2
+JOB4,APP3,JOBB
+'''
 f = open("E:/esp_def.txt")
 print("{}".format(f))
 job_dict_list = {}
